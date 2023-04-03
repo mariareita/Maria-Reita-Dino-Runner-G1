@@ -10,6 +10,7 @@ DINO_DUCKING = "DUCKING"
 class Dinosaur(Sprite):
     POS_X = 80
     POS_Y = 310
+    POS_Y_DUCK = 345
     JUMP_VELOCITY = 8.5
 
     def __init__(self):
@@ -62,7 +63,7 @@ class Dinosaur(Sprite):
     def duck(self):
         self.image = DUCKING[self.step // 5]
         self.position()
-        self.rect.y = self.POS_Y + 35
+        self.rect.y = self.POS_Y_DUCK
         self.step += 1
         
 
