@@ -45,10 +45,10 @@ class Dinosaur(Sprite):
             self.step = 0
 
     def run(self):
-         #self.image = RUNNING[0] if self.step < 5 else RUNNING[1]
-            self.image = RUNNING[self.step // 5]
-            self.position()
-            self.step += 1
+        #self.image = RUNNING[0] if self.step < 5 else RUNNING[1]
+        self.image = RUNNING[self.step // 5]
+        self.position()
+        self.step += 1
 
     def jump(self):
         self.image = JUMPING
