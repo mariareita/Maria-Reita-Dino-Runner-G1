@@ -16,6 +16,7 @@ class Dinosaur(Sprite):
         self.image = RUNNING[0]
         self.step = 0
         self.action = DINO_RUNNING
+        self.position()
         self.jump_velocity = self.JUMP_VELOCITY
 
     def position(self):
