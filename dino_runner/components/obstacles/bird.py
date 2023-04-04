@@ -1,5 +1,3 @@
-
-
 import random
 from dino_runner.components.obstacles.obstacles import Obstacle
 from dino_runner.utils.constants import BIRD
