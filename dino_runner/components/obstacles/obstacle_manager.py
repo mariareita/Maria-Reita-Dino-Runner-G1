@@ -4,7 +4,6 @@ from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.cactus_large import LargeCactus
 from dino_runner.components.obstacles.cactus_small import SmallCactus
 from dino_runner.components.obstacles.obstacles import Obstacle
-from dino_runner.utils.constants import BIRD
 
 
 class ObstacleManager:

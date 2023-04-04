@@ -1,6 +1,6 @@
 import random
 from dino_runner.components.obstacles.obstacles import Obstacle
-from dino_runner.utils.constants import LARGE_CACTUS, SMALL_CACTUS
+from dino_runner.utils.constants import LARGE_CACTUS
 
 class LargeCactus(Obstacle):
     def __init__(self):
