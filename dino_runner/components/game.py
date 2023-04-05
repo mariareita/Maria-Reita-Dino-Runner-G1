@@ -35,6 +35,7 @@ class Game:
         pygame.quit()
 
     def play(self):
+        self.score.score = 0
         self.playing = True
         self.obstacle_manager.reset()
         while self.playing:
