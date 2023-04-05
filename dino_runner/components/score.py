@@ -1,5 +1,5 @@
-import pygame
 from pygame.sprite import Sprite
+from dino_runner.utils.text import get_score_element
 
 class Score(Sprite):
     def __init__(self):
@@ -11,8 +11,5 @@ class Score(Sprite):
             game.game_speed += 2
 
     def draw(self, screen):
-        font = pygame.font.Font("freesansbold.ttf", 22)
-        text = font.render(f"score: {self.score}", True, (0, 0, 0))
-        text_rect = text.get_rect()
-        text_rect.center = (1000, 40)
-        screen.blit(text, text_rect)
+        score, score_rect = get_score_element(self.score)
+        screen.blit(score, score_rect)

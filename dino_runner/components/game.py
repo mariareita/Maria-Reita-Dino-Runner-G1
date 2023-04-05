@@ -3,7 +3,8 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.score import Score
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
+from dino_runner.utils.constants import BG, GAME_OVER, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
+from dino_runner.utils.text import get_final_message, get_number_deaths, get_score, get_start_message
 
 
 class Game:
@@ -73,18 +74,19 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def show_menu(self):
-        half_screen_height = SCREEN_HEIGHT // 2
-        half_screen_width = SCREEN_WIDTH // 2
         self.screen.fill((255, 255, 255))
         if self.death_count:
-            pass 
-        else:
-            font = pygame.font.Font("freesansbold.ttf", 30)
-            text = font.render("press any key to start", True, (0, 0, 0))
-            text_rect = text.get_rect()
-            text_rect.center = (half_screen_width, half_screen_height)
+            self.screen.blit(GAME_OVER, (360,225))
+            text, text_rect = get_final_message('PRESS ANY KEY RESTART')
             self.screen.blit(text, text_rect)
-            self.screen.blit(START, (half_screen_width - 45, half_screen_height - 140))
+            deaths, deaths_rect = get_number_deaths(self.death_count)
+            self.screen.blit(deaths, deaths_rect)
+            score, score_rect = get_score(Score)
+            self.screen.blit(score, score_rect)
+        else:
+            start, start_rect = get_start_message('START')
+            self.screen.blit(start, start_rect)
+            self.screen.blit(ICON, (360, 225))
 
         pygame.display.flip()
         self.menu_events()
