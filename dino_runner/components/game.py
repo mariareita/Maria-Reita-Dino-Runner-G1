@@ -81,7 +81,7 @@ class Game:
             self.screen.blit(text, text_rect)
             deaths, deaths_rect = get_number_deaths(self.death_count)
             self.screen.blit(deaths, deaths_rect)
-            score, score_rect = get_score(Score)
+            score, score_rect = get_score(self.score.score)
             self.screen.blit(score, score_rect)
         else:
             start, start_rect = get_start_message('START')
