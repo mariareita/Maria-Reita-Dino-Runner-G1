@@ -25,7 +25,7 @@ def get_score(score):
     font = pygame.font.Font("freesansbold.ttf", 22)
     text = font.render(f"score: {score}", True, (0, 0, 0))
     text_rect = text.get_rect()
-    text_rect.center = (600, 400)
+    text_rect.center = (550, 350)
     return text, text_rect
 
 def get_final_message(message):
@@ -39,5 +39,5 @@ def get_number_deaths(deaths):
     font = pygame.font.Font(FONT_STYLE, 20)
     text = font.render(f"Deaths Count: {deaths}", True, BLACK_COLOR)
     text_rect = text.get_rect()
-    text_rect.center = (550, 350)
+    text_rect.center = (550, 380)
     return text, text_rect
