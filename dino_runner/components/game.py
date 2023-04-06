@@ -1,10 +1,11 @@
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.score import Score
 from dino_runner.components.sun import Sun
 
-from dino_runner.utils.constants import BG, CLOUD, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
+from dino_runner.utils.constants import BG, CLOUD, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, START, TITLE, FPS
 from dino_runner.utils.text import draw_message
 
 
@@ -22,10 +23,11 @@ class Game:
         self.y_pos_bg = 380
 
         self.player = Dinosaur()
+        self.obstacle_manager = ObstacleManager()
+        self.power_up_manager = PowerUpManager()
         self.score = Score()
         self.sun = Sun()
         self.death_count = 0
-        self.obstacle_manager = ObstacleManager()
 
     def run(self):
         # Game loop: events - update - draw
@@ -47,6 +49,7 @@ class Game:
 
     def reset(self):
         self.obstacle_manager.reset()
+        self.power_up_manager.reset()
         self.score.reset()
         self.game_speed = 20
 
@@ -61,6 +64,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self.game_speed, self.player, self.on_death)
         self.score.update(self)
+        self.power_up_manager.update(self.game_speed, self.score.score, self.player)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -72,6 +76,8 @@ class Game:
         self.sun.draw(self.screen)
         self.cloud()
         self.obstacle_manager.draw(self.screen)
+        self.power_up_manager.draw(self.screen)
+        #self.player.draw_power_up(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -110,11 +116,13 @@ class Game:
                 self.play()
 
     def on_death(self):
-        self.player.dead(DEAD)
-        self.draw()
-        self.playing = False
-        self.death_count += 1
-        pygame.time.delay(500)
+        if self.player.type != SHIELD_TYPE:
+
+            self.player.dead(DEAD)
+            self.draw()
+            self.playing = False
+            self.death_count += 1
+            pygame.time.delay(500)
 
     def cloud(self):
         image_width = CLOUD.get_width()
