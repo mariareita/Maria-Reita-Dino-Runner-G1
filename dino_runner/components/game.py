@@ -2,6 +2,7 @@ import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.score import Score
+from dino_runner.components.sun import Sun
 
 from dino_runner.utils.constants import BG, CLOUD, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
 from dino_runner.utils.text import draw_message
@@ -22,6 +23,7 @@ class Game:
 
         self.player = Dinosaur()
         self.score = Score()
+        self.sun = Sun()
         self.death_count = 0
         self.obstacle_manager = ObstacleManager()
 
@@ -63,9 +65,11 @@ class Game:
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
+        self.color()
         self.draw_background()
         self.player.draw(self.screen)
         self.score.draw(self.screen)
+        self.sun.draw(self.screen)
         self.cloud()
         self.obstacle_manager.draw(self.screen)
         pygame.display.update()
@@ -119,3 +123,15 @@ class Game:
         self.screen.blit(CLOUD, (image_width + self.x_pos_bg +2030, self.y_pos_bg -300))
         self.screen.blit(CLOUD, (image_width + self.x_pos_bg +900, self.y_pos_bg -120))
         self.screen.blit(CLOUD, (image_width + self.x_pos_bg +3000, self.y_pos_bg -189))
+
+    def color(self):
+        if self.score.score == 1:
+            self.colors = 0
+        self.colors += 1
+
+        if self.colors >= 200:
+            self.screen.fill((252, 243, 207))
+            if self.colors >= 400:
+                self.colors = 0
+        else:
+            self.screen.fill((208, 236, 231))

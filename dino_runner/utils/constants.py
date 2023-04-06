@@ -79,4 +79,6 @@ RESET = pygame.image.load(os.path.join(IMG_DIR, 'Other/Reset.png'))
 
 DEAD = pygame.image.load(os.path.join(IMG_DIR, 'Dino/DinoDead.png'))
 
-KAMEL = pygame.image.load(os.path.join(IMG_DIR, "Other/Kamel.png")),
+KAMEL = pygame.image.load(os.path.join(IMG_DIR, "Other/Kamel.png"))
+
+SUN = pygame.image.load(os.path.join(IMG_DIR, "Other/sun.png"))
