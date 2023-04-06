@@ -116,7 +116,7 @@ class Game:
                 self.play()
 
     def on_death(self):
-        if self.player.type != SHIELD_TYPE or HAMMER_TYPE:
+        if self.player.type != SHIELD_TYPE:
             self.player.dead(DEAD)
             self.draw()
             self.playing = False
