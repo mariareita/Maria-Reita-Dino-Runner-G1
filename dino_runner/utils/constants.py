@@ -76,3 +76,5 @@ START = pygame.image.load(os.path.join(IMG_DIR, 'Other/startgame.png'))
 GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
 
 RESET = pygame.image.load(os.path.join(IMG_DIR, 'Other/Reset.png'))
+
+DEAD = pygame.image.load(os.path.join(IMG_DIR, 'Dino/DinoDead.png'))

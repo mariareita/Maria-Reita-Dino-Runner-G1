@@ -3,7 +3,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.score import Score
 
-from dino_runner.utils.constants import BG, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
+from dino_runner.utils.constants import BG, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
 from dino_runner.utils.text import draw_message
 
 
@@ -35,13 +35,18 @@ class Game:
         pygame.quit()
 
     def play(self):
-        self.score.score = 0
         self.playing = True
+        self.reset()
         self.obstacle_manager.reset()
         while self.playing:
             self.events()
             self.update()
             self.draw()
+
+    def reset(self):
+        self.obstacle_manager.reset()
+        self.score.reset()
+        self.game_speed = 20
 
     def events(self):
         for event in pygame.event.get():
@@ -76,15 +81,16 @@ class Game:
 
     def show_menu(self):
         half_screen_height = SCREEN_HEIGHT // 2
-        half_screen_hWIDTH = SCREEN_WIDTH // 2
-        self.screen.fill((255, 255, 255))
+        half_screen_width = SCREEN_WIDTH // 2
         if self.death_count:
+            self.screen.fill((215, 189, 226))
             self.screen.blit(GAME_OVER, (360,180))
             self.screen.blit(RESET, (500,240))
             draw_message("PRESS ANT KEY RESTART", self.screen, pos_y_center= half_screen_height + 50)
             draw_message(f"Your score: {self.score.score}", self.screen, pos_y_center= half_screen_height + 100)
             draw_message(f"Death count: {self.death_count}", self.screen, pos_y_center= half_screen_height + 150)
         else:
+            self.screen.fill((215, 189, 226))
             draw_message("START", self.screen, pos_y_center= half_screen_height + 200)
             self.screen.blit(START, (300, 225))
 
@@ -99,6 +105,9 @@ class Game:
                 self.play()
 
     def on_death(self):
-        pygame.time.delay(500)
+        self.player.dead(DEAD)
+        self.draw()
         self.playing = False
         self.death_count += 1
+        pygame.time.delay(500)
+

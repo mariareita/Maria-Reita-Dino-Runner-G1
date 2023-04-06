@@ -13,3 +13,6 @@ class Score(Sprite):
     def draw(self, screen):
         score, score_rect = get_score_element(self.score)
         screen.blit(score, score_rect)
+
+    def reset(self):
+        self.score = 0

@@ -66,6 +66,8 @@ class Dinosaur(Sprite):
         self.rect.y = self.POS_Y_DUCK
         self.step += 1
         
+    def dead(self, image):
+        self.image = image
 
     def draw(self, screen: Surface):
         screen.blit(self.image, (self.rect.x, self.rect.y))
