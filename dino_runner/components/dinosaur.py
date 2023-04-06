@@ -80,7 +80,7 @@ class Dinosaur(Sprite):
 
     def on_pick_power_up(self, power_up):
         self.type = power_up.type
-        self.power_up_time_up = power_up.start_time + (power_up.duration / 1000)
+        self.power_up_time_up = power_up.start_time + (power_up.duration * 1000)
 
     def draw_power_up(self, screen):
         if self.type != DEFAULT_TYPE:
