@@ -1,11 +1,12 @@
 import random
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.cactus import Cactus
+from dino_runner.components.obstacles.kamel import Kamel
 from dino_runner.components.obstacles.obstacles import Obstacle
 
 
 class ObstacleManager:
-    generate_obstacles =[Cactus, Bird]
+    generate_obstacles =[Cactus, Bird, Kamel]
 
     def __init__(self):
         self.obstacles: list[Obstacle] = []

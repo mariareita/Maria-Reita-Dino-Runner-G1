@@ -3,7 +3,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.score import Score
 
-from dino_runner.utils.constants import BG, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
+from dino_runner.utils.constants import BG, CLOUD, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
 from dino_runner.utils.text import draw_message
 
 
@@ -66,6 +66,7 @@ class Game:
         self.draw_background()
         self.player.draw(self.screen)
         self.score.draw(self.screen)
+        self.cloud()
         self.obstacle_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
@@ -111,3 +112,10 @@ class Game:
         self.death_count += 1
         pygame.time.delay(500)
 
+    def cloud(self):
+        image_width = CLOUD.get_width()
+        self.screen.blit(CLOUD, (image_width + self.x_pos_bg +1020, self.y_pos_bg -250))
+        self.screen.blit(CLOUD, (image_width + self.x_pos_bg +1070, self.y_pos_bg -250))
+        self.screen.blit(CLOUD, (image_width + self.x_pos_bg +2030, self.y_pos_bg -300))
+        self.screen.blit(CLOUD, (image_width + self.x_pos_bg +900, self.y_pos_bg -120))
+        self.screen.blit(CLOUD, (image_width + self.x_pos_bg +3000, self.y_pos_bg -189))
