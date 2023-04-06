@@ -80,9 +80,13 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
+CAKE = pygame.image.load(os.path.join(IMG_DIR, 'Other/cake.png'))
+
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hammer"
+CAKE_TYPE = "cake"
+HEART_TYPE = "heart"
 
 START = pygame.image.load(os.path.join(IMG_DIR, 'Other/startgame.png'))
 

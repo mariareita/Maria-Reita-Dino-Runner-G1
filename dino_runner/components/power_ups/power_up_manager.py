@@ -1,13 +1,14 @@
 import random
 
 import pygame
+from dino_runner.components.power_ups.cake import Cake
 from dino_runner.components.power_ups.hammer import Hammer
 from dino_runner.components.power_ups.power_up import PowerUp
 from dino_runner.components.power_ups.shield import Shield
 
 
 class PowerUpManager:
-    power = [Shield, Hammer]
+    power = [Shield, Hammer, Cake]
 
     def __init__(self):
         self.power_ups: list[PowerUp] = []
