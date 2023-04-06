@@ -23,8 +23,7 @@ class ObstacleManager:
             obstacle.update(game_speed, self.obstacles)
             if obstacle.rect.colliderect(player.rect):
                 if player.type == CAKE_TYPE:
-                    if player.rect.colliderect(obstacle.rect):
-                        obstacle.rect = pygame.Rect(0, 0, 0, 0)
+                    obstacle.rect = pygame.Rect(0, 0, 0, 0)
                 elif player.type == HAMMER_TYPE:
                     self.obstacles.pop()
                 else:

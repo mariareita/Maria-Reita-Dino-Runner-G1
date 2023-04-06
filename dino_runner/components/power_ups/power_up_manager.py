@@ -7,7 +7,7 @@ from dino_runner.components.power_ups.shield import Shield
 
 
 class PowerUpManager:
-    power = [Shield, Hammer, Cake]
+    power = [Cake, Hammer, Shield]
 
     def __init__(self):
         self.power_ups: list[PowerUp] = []
