@@ -1,7 +1,7 @@
 from pygame import Surface
 from pygame.sprite import Sprite
 import pygame
-from dino_runner.utils.constants import DEFAULT_TYPE, DUCKING, DUCKING_SHIELD, JUMPING, JUMPING_SHIELD, RUNNING, RUNNING_SHIELD, SHIELD_TYPE
+from dino_runner.utils.constants import DEFAULT_TYPE, DUCKING, DUCKING_HAMMER, DUCKING_SHIELD, HAMMER_TYPE, JUMPING, JUMPING_HAMMER, JUMPING_SHIELD, RUNNING, RUNNING_HAMMER, RUNNING_SHIELD, SHIELD_TYPE
 from dino_runner.utils.text import draw_message
 
 DINO_JUMPING = "JUMPING"
@@ -22,9 +22,9 @@ class Dinosaur(Sprite):
         self.position()
         self.jump_velocity = self.JUMP_VELOCITY
         self.power_up_time_up = 0
-        self.img_run = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
-        self.img_duck = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
-        self.img_jump = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD}
+        self.img_run = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD, HAMMER_TYPE: RUNNING_HAMMER}
+        self.img_duck = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD, HAMMER_TYPE: DUCKING_HAMMER}
+        self.img_jump = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD, HAMMER_TYPE: JUMPING_HAMMER}
 
     def position(self):
         self.rect = self.image.get_rect()
@@ -80,13 +80,13 @@ class Dinosaur(Sprite):
 
     def on_pick_power_up(self, power_up):
         self.type = power_up.type
-        self.power_up_time_up = (power_up.start_time + power_up.duration / 1000)
+        self.power_up_time_up = power_up.start_time + (power_up.duration / 1000)
 
-    #def draw_power_up(self, screen):
-        #if self.type != DEFAULT_TYPE:
-            #time_up_show = round((self.power_up_time_up - pygame.time.get_ticks()) / 1000, 2)
-            #if time_up_show >= 0:
-                #draw_message(f"{self.type.capitalize()} enabled for {time_up_show} seconds.", screen, font_size=18, pos_y_center=40)
-            #else:
-                #self.type = DEFAULT_TYPE
-                #self.power_up_time_up = 0
+    def draw_power_up(self, screen):
+        if self.type != DEFAULT_TYPE:
+            time_up_show = round((self.power_up_time_up - pygame.time.get_ticks()) / 1000, 2)
+            if time_up_show >= 0:
+                draw_message(f"{self.type.capitalize()} enabled for {time_up_show} seconds.", screen, font_size=18, pos_y_center=40)
+            else:
+                self.type = DEFAULT_TYPE
+                self.power_up_time_up = 0

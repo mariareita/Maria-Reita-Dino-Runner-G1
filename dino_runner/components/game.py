@@ -5,7 +5,7 @@ from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.score import Score
 from dino_runner.components.sun import Sun
 
-from dino_runner.utils.constants import BG, CLOUD, DEAD, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, START, TITLE, FPS
+from dino_runner.utils.constants import BG, CLOUD, DEAD, GAME_OVER, HAMMER_TYPE, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, START, TITLE, FPS
 from dino_runner.utils.text import draw_message
 
 
@@ -77,7 +77,7 @@ class Game:
         self.cloud()
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
-        #self.player.draw_power_up(self.screen)
+        self.player.draw_power_up(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -116,8 +116,7 @@ class Game:
                 self.play()
 
     def on_death(self):
-        if self.player.type != SHIELD_TYPE:
-
+        if self.player.type != SHIELD_TYPE or HAMMER_TYPE:
             self.player.dead(DEAD)
             self.draw()
             self.playing = False
