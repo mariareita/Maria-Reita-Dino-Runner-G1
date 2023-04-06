@@ -3,8 +3,8 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.score import Score
 
-from dino_runner.utils.constants import BG, GAME_OVER, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
-from dino_runner.utils.text import get_final_message, get_number_deaths, get_score, get_start_message
+from dino_runner.utils.constants import BG, GAME_OVER, ICON, RESET, SCREEN_HEIGHT, SCREEN_WIDTH, START, TITLE, FPS
+from dino_runner.utils.text import draw_message
 
 
 class Game:
@@ -75,19 +75,18 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def show_menu(self):
+        half_screen_height = SCREEN_HEIGHT // 2
+        half_screen_hWIDTH = SCREEN_WIDTH // 2
         self.screen.fill((255, 255, 255))
         if self.death_count:
-            self.screen.blit(GAME_OVER, (360,225))
-            text, text_rect = get_final_message('PRESS ANY KEY RESTART')
-            self.screen.blit(text, text_rect)
-            deaths, deaths_rect = get_number_deaths(self.death_count)
-            self.screen.blit(deaths, deaths_rect)
-            score, score_rect = get_score(self.score.score)
-            self.screen.blit(score, score_rect)
+            self.screen.blit(GAME_OVER, (360,180))
+            self.screen.blit(RESET, (500,240))
+            draw_message("PRESS ANT KEY RESTART", self.screen, pos_y_center= half_screen_height + 50)
+            draw_message(f"Your score: {self.score.score}", self.screen, pos_y_center= half_screen_height + 100)
+            draw_message(f"Death count: {self.death_count}", self.screen, pos_y_center= half_screen_height + 150)
         else:
-            start, start_rect = get_start_message('START')
-            self.screen.blit(start, start_rect)
-            self.screen.blit(ICON, (360, 225))
+            draw_message("START", self.screen, pos_y_center= half_screen_height + 200)
+            self.screen.blit(START, (300, 225))
 
         pygame.display.flip()
         self.menu_events()
