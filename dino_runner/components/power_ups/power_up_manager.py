@@ -1,5 +1,4 @@
 import random
-
 import pygame
 from dino_runner.components.power_ups.cake import Cake
 from dino_runner.components.power_ups.hammer import Hammer
